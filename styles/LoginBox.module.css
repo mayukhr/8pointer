@@ -1,0 +1,26 @@
+.loginbox {
+  border: 2px solid white;
+  border-radius: 1vw;
+  width: 80%;
+  /* height: 50vh; */
+  /* margin-top: 10vh; */
+}
+.label {
+  color: red;
+  font-size: 5vh;
+  font-weight: bold;
+  /* width: 40%; */
+}
+.inputFieldsWithLabel {
+  padding: 2vw 0 1vw 2vw;
+}
+.text {
+  border: 2px solid white;
+  border-radius: .2vw;
+  background-color: black;
+  /* width: 90%; */
+  height: 2rem;
+}
+.checkbox {
+
+}

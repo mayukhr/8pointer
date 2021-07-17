@@ -1,0 +1,17 @@
+.mainHeader {
+  /* position: absolute; */
+  width: 356px;
+  height: 106px;
+  left: 712px;
+  top: 64px;
+
+  font-family: 'VT323', monospace;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 96px;
+  line-height: 96px;
+
+  color: #FFFFFF;
+
+  text-shadow: 14px 4px 4px rgba(255, 255, 255, 0.25);
+}
