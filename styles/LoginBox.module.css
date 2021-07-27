@@ -1,26 +1,57 @@
 .loginbox {
   border: 2px solid white;
   border-radius: 1vw;
-  width: 80%;
-  /* height: 50vh; */
-  /* margin-top: 10vh; */
+  width: 500px;
+  max-width: 80%;
 }
 .label {
   color: red;
-  font-size: 5vh;
+  font-size: 1.5em;
   font-weight: bold;
-  /* width: 40%; */
 }
-.inputFieldsWithLabel {
-  padding: 2vw 0 1vw 2vw;
+
+.flexOuter {
+  list-style-type: none;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2vw 2vw 1vw 2vw;
 }
-.text {
-  border: 2px solid white;
+
+.flexOuter li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.flexOuter > li > label {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.flexOuter > li > label + * {
+  flex: 1 0 220px;
+}
+
+.flexOuter li input {
+  border: 1px solid grey;
   border-radius: .2vw;
   background-color: black;
-  /* width: 90%; */
   height: 2rem;
+  color: white;
+  font-family: inherit;
+  font-size: 1.5em;
 }
-.checkbox {
 
+.flexOuter li button {
+  margin: auto;
+  padding: 8px 16px;
+  border: none;
+  border: 1px solid grey;
+  background: #333;
+  color: #f2f2f2;
+  letter-spacing: .09em;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 1.5em;
 }
