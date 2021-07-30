@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-8pointer-dev-155044-authRole",
+            "UnauthRoleArn": "arn:aws:iam::004161808888:role/amplify-8pointer-dev-155044-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::004161808888:role/amplify-8pointer-dev-155044-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-8pointer-dev-155044-deployment",
+            "UnauthRoleName": "amplify-8pointer-dev-155044-unauthRole",
+            "StackName": "amplify-8pointer-dev-155044",
+            "StackId": "arn:aws:cloudformation:us-east-1:004161808888:stack/amplify-8pointer-dev-155044/d0d6f280-f11f-11eb-ba57-0a78092beb51",
+            "AmplifyAppId": "dimwiry8pfti5"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "dimwiry8pfti5",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
