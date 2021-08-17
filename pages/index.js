@@ -2,17 +2,18 @@ import { useState, useEffect, useContext } from 'react';
 import styles from '../styles/Home.module.css';
 import Header from '../components/Header';
 import LoginBox from '../components/LoginBox';
-import Router, {useRouter} from "next/router";
-import { userDetailContext } from './_app';
+import {useRouter} from "next/router";
+import AuthContext from '../components/AuthContext';
 
 export default function Home() {
-  const userData = useContext(userDetailContext);
+  const {userData} = useContext(AuthContext);
+  const { push } = useRouter();
 
   useEffect(()=> {
     if(userData?.nickname && userData?.project) {
-      Router.push('/room/' + userData?.project);
+      push('/room/' + userData?.project);
     } 
-  }, []);
+  }, [userData?.nickname, userData?.project]);
   
   return (
     <div className={styles.container}>

@@ -1,18 +1,17 @@
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect, useContext } from 'react';
 import styles from '../../styles/Home.module.css';
 import Header from '../../components/Header';
-import LoginBox from '../../components/LoginBox';
-import { userDetailContext } from '../_app';
+import AuthContext from '../../components/AuthContext';
 
 const Room = (props) => {
-    const router = useRouter();
-    const { slug } = router.query;
-    const userData = useContext(userDetailContext);
+    const { push, query } = useRouter();
+    const { slug } = query;
+    const {userData} = useContext(AuthContext);
 
     useEffect(()=> {
         if(!userData?.nickname || !userData?.project) {
-          Router.push('/');
+          push('/');
         } 
     }, []);
 
@@ -24,7 +23,6 @@ const Room = (props) => {
             </main>
         </div>
     );
-    // return <p>Room: {slug}</p>
 }
   
 export default Room;
