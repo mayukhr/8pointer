@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import LoginStyles from '../styles/LoginBox.module.css';
 import {useRouter} from "next/router";
 import AuthContext from './AuthContext';
-import { log } from "gun";
+// import { log } from "gun";
 
 const LoginBox = (props) => {
     const [nickname, setNickname] = useState(props.nickname);
