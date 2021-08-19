@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext } from 'react';
 import LoginStyles from '../styles/LoginBox.module.css';
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router';
 import AuthContext from './AuthContext';
-import { log } from "gun";
+import { gun } from '../utils/utils';
 
 const LoginBox = (props) => {
     const [nickname, setNickname] = useState(props.nickname);
@@ -16,6 +16,15 @@ const LoginBox = (props) => {
         if(window && nickname && project) {
             login(nickname, project, isMaster);
             push('/room/'+project);
+
+            //add user to gun. TODO:: need to check for duplicate users
+            const room = gun.get(project);
+            room.set({
+                user: nickname,
+                isMaster,
+                createdAt: Date.now(),
+                isActive: true,
+            })
         }
     };
 
