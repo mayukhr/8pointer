@@ -4,25 +4,38 @@ import styles from '../../styles/Home.module.css';
 import Header from '../../components/Header';
 import AuthContext from '../../components/AuthContext';
 import { gun } from '../../utils/utils';
+import useUserLogInOut from '../../hooks/useUserLogInOut';
 
 const Room = (props) => {
     const { push, query } = useRouter();
     const { slug } = query;
     const {userData} = useContext(AuthContext);
     const [loggedInUsers, setLoggedInUsers] = useState([]);
+    
+    //hook to change user isActive status
+    // useUserLogInOut(userData?.nickname, userData?.project);
 
     useEffect(()=> {
         if(!userData?.nickname || !userData?.project) {
           push('/');
         } else {
-            const roomData = gun.get(userData?.project);
-            const allLoggedInUsers = roomData.map().on(item=>{
-                setLoggedInUsers(prevUsers => ([...prevUsers, item.user]));
+            // useUserLogInOut(userData?.nickname, userData?.project);
+            const roomUsers = gun.get('projects').get(userData?.project).get(`${userData?.project}-users`);
+
+            //const roomData = gun.get(userData?.project);
+            const allLoggedInUsers = roomUsers.map().on(item=>{
+                setLoggedInUsers(prevUsers => ([...prevUsers, `${item.nickname}, isMaster(${item.isMaster}), isActive(${item.isActive})`]));
             });
         }
         
         // Clean user from DB
         return function cleanup() {
+            // gun.get('mak').put({
+            //     user: 'jjii',
+            //     isMaster: true,
+            //     createdAt: Date.now(),
+            //     isActive: false,
+            // });
             // let asd = gun.get('mak').map().on();
             // console.log(`gun.get('mak').map().on(ui.show.users) => ${asd}`);
             // gun.get('mak').on(function(data, key){
@@ -57,7 +70,7 @@ const Room = (props) => {
         <div className={styles.container}>
           <Header/>
             <main className={styles.main}>
-                I am in {slug} room with: {loggedInUsers.join(', ')}
+                I am in {slug} room with: {loggedInUsers.join('|||| ')}
             </main>
         </div>
     );
