@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "aws-sdk": "^2.973.0",
     "gun": "^0.2020.1232",
     "next": "10.2.3",
     "next-auth": "^3.27.3",
