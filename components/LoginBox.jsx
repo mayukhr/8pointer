@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext } from 'react';
 import LoginStyles from '../styles/LoginBox.module.css';
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router';
 import AuthContext from './AuthContext';
-// import { log } from "gun";
+import { gun } from '../utils/utils';
 
 const LoginBox = (props) => {
     const [nickname, setNickname] = useState(props.nickname);
@@ -16,6 +16,24 @@ const LoginBox = (props) => {
         if(window && nickname && project) {
             login(nickname, project, isMaster);
             push('/room/'+project);
+
+            // add user to gun.
+            // 1: setting the current project
+            // 2: Hierarchy:: project > currentProject > project-users > currentUser
+            let projects = gun.get('projects');
+            let currentProject = gun.get(project);
+            projects.set(currentProject);
+
+            const currentUser = gun.get(nickname);
+            const user = {
+                nickname,
+                isMaster,
+                isActive: true,
+            };
+            currentUser.put(user);
+            const users = gun.get(`${project}-users`);
+            users.set(currentUser);
+            currentProject.set(users);    
         }
     };
 
