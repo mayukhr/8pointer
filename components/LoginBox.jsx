@@ -17,14 +17,23 @@ const LoginBox = (props) => {
             login(nickname, project, isMaster);
             push('/room/'+project);
 
-            //add user to gun. TODO:: need to check for duplicate users
-            const room = gun.get(project);
-            room.set({
-                user: nickname,
+            // add user to gun.
+            // 1: setting the current project
+            // 2: Hierarchy:: project > currentProject > project-users > currentUser
+            let projects = gun.get('projects');
+            let currentProject = gun.get(project);
+            projects.set(currentProject);
+
+            const currentUser = gun.get(nickname);
+            const user = {
+                nickname,
                 isMaster,
-                createdAt: Date.now(),
                 isActive: true,
-            })
+            };
+            currentUser.put(user);
+            const users = gun.get(`${project}-users`);
+            users.set(currentUser);
+            currentProject.set(users);    
         }
     };
 
