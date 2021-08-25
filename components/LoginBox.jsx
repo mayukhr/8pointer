@@ -28,12 +28,23 @@ const LoginBox = (props) => {
             const user = {
                 nickname,
                 isMaster,
-                isActive: true,
+                // isActive: true,
             };
             currentUser.put(user);
             const users = gun.get(`${project}-users`);
             users.set(currentUser);
-            currentProject.set(users);    
+            currentProject.set(users);
+            
+            //setting userStatus
+            const currentUserName = gun.get(`${nickname}-status`);
+            const currentUserStatus = {
+                nickname,
+                isActive: true,
+            };
+            currentUserName.put(currentUserStatus);
+            const userStatus = gun.get(`${project}-userStatus`);
+            userStatus.set(currentUserName);
+            currentProject.set(userStatus);
         }
     };
 

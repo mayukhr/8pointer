@@ -4,27 +4,32 @@ import { gun } from '../utils/utils';
 // This hook updates gun with user's isActive status
 export default function useUserLogInOut(nickname, project) {
     useEffect(() => {
-        const userIsActive$ = gun
+        if(nickname && project) {
+            const userIsActiveStatus$ = gun
                                 .get('projects')
                                 .get(project)
-                                .get(`${project}-users`)
-                                .get(nickname)
+                                .get(`${project}-userStatus`)
+                                .get(`${nickname}-status`)
                                 .get('isActive');
-        const handleInactive = (event) => {
-            userIsActive$.put(false);
-        };
-        const handleActive = (event) => {
-            userIsActive$.put(true);
-        };
+            
+            const handleInactive = (event) => {
+                userIsActiveStatus$.set(false);
+            };
+            const handleActive = (event) => {
+                userIsActiveStatus$.set(true);
+            };
 
-        window.addEventListener("beforeunload", handleInactive);
-        window.addEventListener('offline', handleInactive);
-        window.addEventListener('online', handleActive);
+            window.addEventListener("unload", handleInactive);
+            window.addEventListener('offline', handleInactive);
+            window.addEventListener('online', handleActive);
+            window.addEventListener("onload", handleActive);
 
-        return () => {
-            window.removeEventListener("beforeunload", handleInactive);
-            window.removeEventListener("offline", handleInactive);
-            window.removeEventListener("online", handleActive);
+            return () => {
+                window.removeEventListener("unload", handleInactive);
+                window.removeEventListener("offline", handleInactive);
+                window.removeEventListener("online", handleActive);
+                window.removeEventListener("onload", handleActive);
+            }
         }
     }, [nickname, project]);
 }
